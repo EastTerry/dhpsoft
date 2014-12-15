@@ -32,7 +32,7 @@ CREATE TABLE `t_action` (
   `maxcount` int(11) DEFAULT 1 COMMENT '最大参加人数',
   `realcount` int(11) DEFAULT 1 COMMENT '实际参加人数',
   `signcount` int(11) DEFAULT 1 COMMENT '已报名人数',
-  `status` varchar(1) DEFAULT NULL COMMENT '活动状态 s 报名中 e 报名结束 p 活动进行中 o 活动已技术',
+  `status` varchar(1) DEFAULT NULL COMMENT '活动状态 s 报名中 e 报名结束 p 活动进行中 o 活动已结束',
   `invalid` varchar(1) DEFAULT NULL COMMENT '是否有效',
   PRIMARY KEY (`aid`),
   KEY `operid` (`operid`),
