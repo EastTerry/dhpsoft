@@ -150,7 +150,7 @@ CREATE TABLE `t_post` (
   `title` varchar(255) NOT NULL DEFAULT '' COMMENT '帖子主题',
   `content` varchar(1000) DEFAULT NULL,
   `posttime` date NOT NULL COMMENT '发贴时间',
-  `uisd` int(11) NOT NULL COMMENT '发贴人id',
+  `usid` int(11) NOT NULL COMMENT '发贴人id',
   `postname` varchar(255) NOT NULL DEFAULT '' COMMENT '发贴人姓名',
   `types` varchar(1) DEFAULT NULL COMMENT '帖子类型',
   `invalid` varchar(1) DEFAULT '1' COMMENT '是否有效 1：有效 0：无效',
@@ -205,13 +205,13 @@ CREATE TABLE `t_rpost` (
 DROP TABLE IF EXISTS `t_rwithu`;
 CREATE TABLE `t_rwithu` (
   `urid` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键id',
-  `uisd` int(11) NOT NULL COMMENT '发贴人id',
+  `usid` int(11) NOT NULL COMMENT '发贴人id',
   `rid` int(11) NOT NULL COMMENT '回帖人id',
   `invalid` varchar(1) DEFAULT '1' COMMENT '是否有效用户：1，有效，0，失效',
   PRIMARY KEY (`urid`),
   KEY `usid` (`usid`),
   KEY `rid` (`rid`),
-  CONSTRAINT `t_rwithu_ibfk_1` FOREIGN KEY (`uisd`) REFERENCES `t_user` (`uisd`),
+  CONSTRAINT `t_rwithu_ibfk_1` FOREIGN KEY (`usid`) REFERENCES `t_user` (`usid`),
   CONSTRAINT `t_rwithu_ibfk_2` FOREIGN KEY (`rid`) REFERENCES `t_rpost` (`rid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
