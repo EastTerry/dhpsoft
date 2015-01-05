@@ -1,16 +1,16 @@
 /*
-Navicat MySQL Data Transfer
+Navicat MariaDB Data Transfer
 
-Source Server         : MysqlConnct
-Source Server Version : 50540
+Source Server         : MariaDB
+Source Server Version : 100015
 Source Host           : localhost:3306
-Source Database       : mint
+Source Database       : tour
 
-Target Server Type    : MYSQL
-Target Server Version : 50540
+Target Server Type    : MariaDB
+Target Server Version : 100015
 File Encoding         : 65001
 
-Date: 2014-12-15 07:08:37
+Date: 2015-01-05 09:26:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,27 +21,23 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `t_action`;
 CREATE TABLE `t_action` (
   `aid` int(11) NOT NULL AUTO_INCREMENT,
-  `operid` int(11) NOT NULL COMMENT 'å‘èµ·äººid',
-  `opername` varchar(50) DEFAULT '' COMMENT 'å‘èµ·äººåç§°',
-  `subject` varchar(255) DEFAULT '' COMMENT 'æ´»åŠ¨ä¸»é¢˜',
-  `content` varchar(1000) DEFAULT '' COMMENT 'æ´»åŠ¨å†…å®¹',
-  `starttime` date COMMENT 'å‘èµ·æ—¶é—´',
-  `endsigntime` date COMMENT 'æŠ¥åç»“æŸæ—¶é—´',
-  `begintime` date COMMENT 'æ´»åŠ¨å¼€å§‹æ—¶é—´',
-  `endtime` date COMMENT 'æ´»åŠ¨ç»“æŸæ—¶é—´',
-  `maxcount` int(11) DEFAULT 1 COMMENT 'æœ€å¤§å‚åŠ äººæ•°',
-  `realcount` int(11) DEFAULT 1 COMMENT 'å®é™…å‚åŠ äººæ•°',
-  `signcount` int(11) DEFAULT 1 COMMENT 'å·²æŠ¥åäººæ•°',
-  `status` varchar(1) DEFAULT 's' COMMENT 'æ´»åŠ¨çŠ¶æ€ s æŠ¥åä¸­ e æŠ¥åç»“æŸ p æ´»åŠ¨è¿›è¡Œä¸­ o æ´»åŠ¨å·²ç»“æŸ',
-  `invalid` varchar(1) DEFAULT '1' COMMENT 'æ˜¯å¦æœ‰æ•ˆ 1 æœ‰æ•ˆ 0 æ— æ•ˆ',
+  `operid` int(11) NOT NULL COMMENT '·¢ÆğÈËid',
+  `opername` varchar(50) DEFAULT '' COMMENT '·¢ÆğÈËÃû³Æ',
+  `subject` varchar(255) DEFAULT '' COMMENT '»î¶¯Ö÷Ìâ',
+  `content` varchar(1000) DEFAULT '' COMMENT '»î¶¯ÄÚÈİ',
+  `starttime` date DEFAULT NULL COMMENT '·¢ÆğÊ±¼ä',
+  `endsigntime` date DEFAULT NULL COMMENT '±¨Ãû½áÊøÊ±¼ä',
+  `begintime` date DEFAULT NULL COMMENT '»î¶¯¿ªÊ¼Ê±¼ä',
+  `endtime` date DEFAULT NULL COMMENT '»î¶¯½áÊøÊ±¼ä',
+  `maxcount` int(11) DEFAULT '1' COMMENT '×î´ó²Î¼ÓÈËÊı',
+  `realcount` int(11) DEFAULT '1' COMMENT 'Êµ¼Ê²Î¼ÓÈËÊı',
+  `signcount` int(11) DEFAULT '1' COMMENT 'ÒÑ±¨ÃûÈËÊı',
+  `status` varchar(1) DEFAULT 's' COMMENT '»î¶¯×´Ì¬ s ±¨ÃûÖĞ e ±¨Ãû½áÊø p »î¶¯½øĞĞÖĞ o »î¶¯ÒÑ½áÊø',
+  `invalid` varchar(1) DEFAULT '1' COMMENT 'ÊÇ·ñÓĞĞ§ 1 ÓĞĞ§ 0 ÎŞĞ§',
   PRIMARY KEY (`aid`),
   KEY `operid` (`operid`),
   CONSTRAINT `t_action_ibfk_1` FOREIGN KEY (`operid`) REFERENCES `t_user` (`usid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of t_action
--- ----------------------------
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ÓÃ»§»î¶¯±í';
 
 -- ----------------------------
 -- Table structure for t_address
@@ -49,60 +45,48 @@ CREATE TABLE `t_action` (
 DROP TABLE IF EXISTS `t_address`;
 CREATE TABLE `t_address` (
   `aid` int(11) NOT NULL AUTO_INCREMENT,
-  `province` varchar(50) DEFAULT NULL COMMENT 'çœ',
-  `district` varchar(50) DEFAULT NULL COMMENT 'å¿/åŒº',
-  `city` varchar(50) DEFAULT NULL COMMENT 'å¸‚',
+  `province` varchar(50) DEFAULT NULL COMMENT 'Ê¡',
+  `district` varchar(50) DEFAULT NULL COMMENT 'ÏØ/Çø',
+  `city` varchar(50) DEFAULT NULL COMMENT 'ÊĞ',
   `address` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`aid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of t_address
--- ----------------------------
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ÓÃ»§µØÖ·ĞÅÏ¢';
 
 -- ----------------------------
 -- Table structure for t_awithr
 -- ----------------------------
 DROP TABLE IF EXISTS `t_awithr`;
 CREATE TABLE `t_awithr` (
-  `arid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ä¸»é”®id',
-  `aid` int(11) NOT NULL COMMENT 'æ´»åŠ¨id',
-  `invalid` varchar(1) DEFAULT '1' COMMENT 'æ˜¯å¦æœ‰æ•ˆ',
-  `rid` int(11) NOT NULL COMMENT 'è·¯çº¿id',
+  `arid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Ö÷¼üid',
+  `aid` int(11) NOT NULL COMMENT '»î¶¯id',
+  `invalid` varchar(1) DEFAULT '1' COMMENT 'ÊÇ·ñÓĞĞ§',
+  `rid` int(11) NOT NULL COMMENT 'Â·Ïßid',
   PRIMARY KEY (`arid`),
   KEY `aid` (`aid`),
   KEY `rid` (`rid`),
   CONSTRAINT `t_awithr_ibfk_1` FOREIGN KEY (`aid`) REFERENCES `t_action` (`aid`),
   CONSTRAINT `t_awithr_ibfk_2` FOREIGN KEY (`rid`) REFERENCES `t_route` (`lid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of t_awithr
--- ----------------------------
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='»î¶¯Â·ÏßÏêÇé±í';
 
 -- ----------------------------
 -- Table structure for t_awithu
 -- ----------------------------
 DROP TABLE IF EXISTS `t_awithu`;
 CREATE TABLE `t_awithu` (
-  `ausid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ä¸»é”®id',
-  `usid` int(11) NOT NULL COMMENT 'ç”¨æˆ·idï¼Œå¤–é”®å…³è”åˆ°ç”¨æˆ·çš„id',
-  `aid` int(11) NOT NULL COMMENT 'æ´»åŠ¨idå…³è”åˆ°æ´»åŠ¨',
-  `jointime` date  COMMENT 'åŠ å…¥æ—¶é—´',
-  `rebacktime` date  COMMENT 'é€€å‡ºæ—¶é—´',
-  `reseaon` varchar(500) DEFAULT NULL COMMENT 'é€€å‡ºåŸå› ',
-  `success` varchar(1) DEFAULT NULL COMMENT 'æ˜¯å¦æˆåŠŸå‚ä¸å®Œæˆä¸€æ¬¡æ´»åŠ¨  sï¼šæˆåŠŸï¼Œqï¼Œä¸­é€”é€€å‡ºï¼Œxï¼Œæ´»åŠ¨ä¸­é€€å‡º',
-  `invalid` varchar(1) DEFAULT '1' COMMENT 'æ˜¯å¦æœ‰æ•ˆ 1ï¼šæœ‰æ•ˆï¼Œ0ï¼šæ— æ•ˆ',
+  `ausid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Ö÷¼üid',
+  `usid` int(11) NOT NULL COMMENT 'ÓÃ»§id£¬Íâ¼ü¹ØÁªµ½ÓÃ»§µÄid',
+  `aid` int(11) NOT NULL COMMENT '»î¶¯id¹ØÁªµ½»î¶¯',
+  `jointime` date DEFAULT NULL COMMENT '¼ÓÈëÊ±¼ä',
+  `rebacktime` date DEFAULT NULL COMMENT 'ÍË³öÊ±¼ä',
+  `reseaon` varchar(500) DEFAULT NULL COMMENT 'ÍË³öÔ­Òò',
+  `success` varchar(1) DEFAULT NULL COMMENT 'ÊÇ·ñ³É¹¦²ÎÓëÍê³ÉÒ»´Î»î¶¯  s£º³É¹¦£¬q£¬ÖĞÍ¾ÍË³ö£¬x£¬»î¶¯ÖĞÍË³ö',
+  `invalid` varchar(1) DEFAULT '1' COMMENT 'ÊÇ·ñÓĞĞ§ 1£ºÓĞĞ§£¬0£ºÎŞĞ§',
   PRIMARY KEY (`ausid`),
   KEY `aid` (`aid`),
   KEY `usid` (`usid`),
   CONSTRAINT `t_awithu_ibfk_2` FOREIGN KEY (`aid`) REFERENCES `t_action` (`aid`),
   CONSTRAINT `t_awithu_ibfk_3` FOREIGN KEY (`usid`) REFERENCES `t_user` (`usid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of t_awithu
--- ----------------------------
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ÓÃ»§»î¶¯ÏêÇé±í';
 
 -- ----------------------------
 -- Table structure for t_conis
@@ -110,14 +94,10 @@ CREATE TABLE `t_awithu` (
 DROP TABLE IF EXISTS `t_conis`;
 CREATE TABLE `t_conis` (
   `cid` int(11) NOT NULL AUTO_INCREMENT,
-  `source` varchar(100) NOT NULL COMMENT 'ç§¯åˆ†é¡¹ç›®åç§°',
-  `unit` int(11) NOT NULL DEFAULT '0' COMMENT 'å•å…ƒç§¯åˆ†',
+  `source` varchar(100) NOT NULL COMMENT '»ı·ÖÏîÄ¿Ãû³Æ',
+  `unit` int(11) NOT NULL DEFAULT '0' COMMENT 'µ¥Ôª»ı·Ö',
   PRIMARY KEY (`cid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of t_conis
--- ----------------------------
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='½ğ±Ò±í';
 
 -- ----------------------------
 -- Table structure for t_cwithu
@@ -125,21 +105,17 @@ CREATE TABLE `t_conis` (
 DROP TABLE IF EXISTS `t_cwithu`;
 CREATE TABLE `t_cwithu` (
   `ucid` int(11) NOT NULL AUTO_INCREMENT,
-  `usid` int(11) NOT NULL COMMENT 'ç”¨æˆ·id',
-  `cid` int(11) NOT NULL COMMENT 'ç§¯åˆ†é¡¹id',
-  `reseans` varchar(255) DEFAULT NULL COMMENT 'è·å–åŸå› ',
-  `gaintime` date NOT NULL COMMENT 'è·å–æ—¶é—´',
-  `invalid` varchar(1)  DEFAULT '1' COMMENT 'ç§¯åˆ†æ˜¯å¦æœ‰æ•ˆ 1:æœ‰æ•ˆï¼Œ0ï¼Œæ— æ•ˆ',
+  `usid` int(11) NOT NULL COMMENT 'ÓÃ»§id',
+  `cid` int(11) NOT NULL COMMENT '»ı·ÖÏîid',
+  `reseans` varchar(255) DEFAULT NULL COMMENT '»ñÈ¡Ô­Òò',
+  `gaintime` date NOT NULL COMMENT '»ñÈ¡Ê±¼ä',
+  `invalid` varchar(1) DEFAULT '1' COMMENT '»ı·ÖÊÇ·ñÓĞĞ§ 1:ÓĞĞ§£¬0£¬ÎŞĞ§',
   PRIMARY KEY (`ucid`),
   KEY `usid` (`usid`),
   KEY `cid` (`cid`),
   CONSTRAINT `t_cwithu_ibfk_1` FOREIGN KEY (`usid`) REFERENCES `t_user` (`usid`),
   CONSTRAINT `t_cwithu_ibfk_2` FOREIGN KEY (`cid`) REFERENCES `t_conis` (`cid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of t_cwithu
--- ----------------------------
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ÓÃ»§½ğ±ÒÏêÇé±í';
 
 -- ----------------------------
 -- Table structure for t_post
@@ -147,101 +123,90 @@ CREATE TABLE `t_cwithu` (
 DROP TABLE IF EXISTS `t_post`;
 CREATE TABLE `t_post` (
   `pid` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL DEFAULT '' COMMENT 'å¸–å­ä¸»é¢˜',
+  `title` varchar(255) NOT NULL DEFAULT '' COMMENT 'Ìû×ÓÖ÷Ìâ',
   `content` varchar(1000) DEFAULT NULL,
-  `posttime` date NOT NULL COMMENT 'å‘è´´æ—¶é—´',
-  `usid` int(11) NOT NULL COMMENT 'å‘è´´äººid',
-  `postname` varchar(255) NOT NULL DEFAULT '' COMMENT 'å‘è´´äººå§“å',
-  `types` varchar(1) DEFAULT NULL COMMENT 'å¸–å­ç±»å‹',
-  `invalid` varchar(1) DEFAULT '1' COMMENT 'æ˜¯å¦æœ‰æ•ˆ 1ï¼šæœ‰æ•ˆ 0ï¼šæ— æ•ˆ',
+  `posttime` date NOT NULL COMMENT '·¢ÌùÊ±¼ä',
+  `usid` int(11) NOT NULL COMMENT '·¢ÌùÈËid',
+  `postname` varchar(255) NOT NULL DEFAULT '' COMMENT '·¢ÌùÈËĞÕÃû',
+  `types` varchar(1) DEFAULT NULL COMMENT 'Ìû×ÓÀàĞÍ',
+  `invalid` varchar(1) DEFAULT '1' COMMENT 'ÊÇ·ñÓĞĞ§ 1£ºÓĞĞ§ 0£ºÎŞĞ§',
+  `pcount` int(7) DEFAULT '0' COMMENT '²é¿´ÈËÊı',
+  `rcount` int(7) DEFAULT '0' COMMENT '»Ø¸´ÈËÊı',
   PRIMARY KEY (`pid`),
   KEY `usid` (`usid`),
   CONSTRAINT `t_post_ibfk_1` FOREIGN KEY (`usid`) REFERENCES `t_user` (`usid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of t_post
--- ----------------------------
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Ìû×Ó±í';
 
 -- ----------------------------
 -- Table structure for t_route
 -- ----------------------------
 DROP TABLE IF EXISTS `t_route`;
 CREATE TABLE `t_route` (
-  `lid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ä¸»é”®id',
-  `startaddr` varchar(100) CHARACTER SET utf8 NOT NULL COMMENT 'å‡ºå‘åœ°',
-  `destaddr` varchar(100) CHARACTER SET utf8 NOT NULL COMMENT 'ç›®çš„åœ°',
-  `routes` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT 'è·¯çº¿ä¿¡æ¯',
-  `mapurl` varchar(100) CHARACTER SET utf8 DEFAULT NULL COMMENT 'åœ°å›¾ä¿¡æ¯',
+  `lid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Ö÷¼üid',
+  `startaddr` varchar(100) NOT NULL COMMENT '³ö·¢µØ',
+  `destaddr` varchar(100) NOT NULL COMMENT 'Ä¿µÄµØ',
+  `routes` varchar(255) NOT NULL COMMENT 'Â·ÏßĞÅÏ¢',
+  `mapurl` varchar(100) DEFAULT NULL COMMENT 'µØÍ¼ĞÅÏ¢',
   PRIMARY KEY (`lid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of t_route
--- ----------------------------
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Â·Ïß±í';
 
 -- ----------------------------
 -- Table structure for t_rpost
 -- ----------------------------
 DROP TABLE IF EXISTS `t_rpost`;
 CREATE TABLE `t_rpost` (
-  `rid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'å›å¸–id',
-  `pid` int(11) NOT NULL COMMENT 'ä¸»è´´id',
-  `content` varchar(255) NOT NULL DEFAULT '' COMMENT 'å›å¸–å†…å®¹',
-  `retime` date NOT NULL COMMENT 'å›å¸–æ—¶é—´',
-  `invalid` varchar(255)  DEFAULT '1' COMMENT 'æ˜¯å¦æœ‰æ•ˆ',
+  `rid` int(11) NOT NULL AUTO_INCREMENT COMMENT '»ØÌûid',
+  `pid` int(11) NOT NULL COMMENT 'Ö÷Ìùid',
+  `content` varchar(255) NOT NULL DEFAULT '' COMMENT '»ØÌûÄÚÈİ',
+  `usid` int(11) NOT NULL COMMENT '·¢ÌûÈË',
+  `retime` date NOT NULL COMMENT '»ØÌûÊ±¼ä',
+  `invalid` varchar(255) DEFAULT '1' COMMENT 'ÊÇ·ñÓĞĞ§',
+  `pcount` int(7) DEFAULT '0' COMMENT '²é¿´ÈËÊı',
   PRIMARY KEY (`rid`),
   KEY `pid` (`pid`),
-  CONSTRAINT `t_rpost_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `t_post` (`pid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of t_rpost
--- ----------------------------
-
--- ----------------------------
--- Table structure for t_rwithu
--- ----------------------------
-DROP TABLE IF EXISTS `t_rwithu`;
-CREATE TABLE `t_rwithu` (
-  `urid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ä¸»é”®id',
-  `usid` int(11) NOT NULL COMMENT 'å‘è´´äººid',
-  `rid` int(11) NOT NULL COMMENT 'å›å¸–äººid',
-  `invalid` varchar(1) DEFAULT '1' COMMENT 'æ˜¯å¦æœ‰æ•ˆç”¨æˆ·ï¼š1ï¼Œæœ‰æ•ˆï¼Œ0ï¼Œå¤±æ•ˆ',
-  PRIMARY KEY (`urid`),
-  KEY `usid` (`usid`),
-  KEY `rid` (`rid`),
-  CONSTRAINT `t_rwithu_ibfk_1` FOREIGN KEY (`usid`) REFERENCES `t_user` (`usid`),
-  CONSTRAINT `t_rwithu_ibfk_2` FOREIGN KEY (`rid`) REFERENCES `t_rpost` (`rid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of t_rwithu
--- ----------------------------
+  KEY `t_rpost_ibfk_2` (`usid`),
+  CONSTRAINT `t_rpost_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `t_post` (`pid`),
+  CONSTRAINT `t_rpost_ibfk_2` FOREIGN KEY (`usid`) REFERENCES `t_user` (`usid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='»ØÌû±í';
 
 -- ----------------------------
 -- Table structure for t_user
 -- ----------------------------
 DROP TABLE IF EXISTS `t_user`;
 CREATE TABLE `t_user` (
-  `usid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ä¼šå‘˜idï¼Œå”¯ä¸€ä¸»é”®',
-  `username` varchar(100) NOT NULL DEFAULT '' COMMENT 'ç”¨æˆ·å',
-  `password` varchar(100) NOT NULL DEFAULT '' COMMENT 'å¯†ç ',
-  `regtime` date NOT NULL  COMMENT 'æ³¨å†Œæ—¶é—´',
-  `ranks` varchar(30) DEFAULT '' COMMENT 'ç­‰çº§',
-  `periods` varchar(50) DEFAULT '0' COMMENT 'åœ¨çº¿æ—¶é•¿',
-  `logintime` date   COMMENT 'ä¸Šçº¿æ—¶é—´',
-  `logouttime` date  COMMENT 'ä¸‹çº¿æ—¶é—´',
-  `phone` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT 'è”ç³»ç”µè¯',
-  `email` varchar(100) CHARACTER SET utf8 DEFAULT NULL COMMENT 'é‚®ç®±åœ°å€',
-  `addr` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT 'åœ°å€',
-  `comments` varchar(500) CHARACTER SET utf8 DEFAULT NULL COMMENT 'ä¸ªäººç®€ä»‹',
-  `adm` varchar(1) DEFAULT 'n' COMMENT 'æ˜¯å¦ä¸ºç®¡ç†å‘˜',
-  `conis` int DEFAULT '0' COMMENT 'ç”¨æˆ·é‡‘å¸',
-  `invalid` varchar(1) CHARACTER SET utf8 DEFAULT '1' COMMENT 'æ˜¯å¦æœ‰æ•ˆç”¨æˆ·ï¼š1ï¼Œæœ‰æ•ˆï¼Œ0ï¼Œå¤±æ•ˆ',
+  `usid` int(11) NOT NULL AUTO_INCREMENT COMMENT '»áÔ±id£¬Î¨Ò»Ö÷¼ü',
+  `status` int(11) NOT NULL DEFAULT '2' COMMENT 'ÓÃ»§×´Ì¬ 0 ÏÂÏß 1 ÀëÏß  2 ÔÚÏß',
+  `username` varchar(100) NOT NULL DEFAULT '' COMMENT 'ÓÃ»§Ãû',
+  `password` varchar(100) NOT NULL DEFAULT '' COMMENT 'ÃÜÂë',
+  `regtime` date DEFAULT NULL COMMENT '×¢²áÊ±¼ä',
+  `ranks` varchar(30) DEFAULT '1' COMMENT 'µÈ¼¶',
+  `periods` varchar(50) DEFAULT '0' COMMENT 'ÔÚÏßÊ±³¤',
+  `logintime` date DEFAULT NULL COMMENT 'ÉÏÏßÊ±¼ä',
+  `logouttime` date DEFAULT NULL COMMENT 'ÏÂÏßÊ±¼ä',
+  `phone` varchar(50) DEFAULT NULL COMMENT 'ÁªÏµµç»°',
+  `email` varchar(100) DEFAULT NULL COMMENT 'ÓÊÏäµØÖ·',
+  `addr` varchar(255) DEFAULT NULL COMMENT 'µØÖ·',
+  `comments` varchar(500) DEFAULT NULL COMMENT '¸öÈË¼ò½é',
+  `adm` varchar(1) DEFAULT 'n' COMMENT 'ÊÇ·ñÎª¹ÜÀíÔ±',
+  `conis` int(11) DEFAULT '0' COMMENT 'ÓÃ»§½ğ±Ò',
+  `invalid` varchar(1) DEFAULT '1' COMMENT 'ÊÇ·ñÓĞĞ§ÓÃ»§£º1£¬ÓĞĞ§£¬0£¬Ê§Ğ§',
+  `iconurl` varchar(50) DEFAULT '' COMMENT 'Í·ÏñÍ¼Æ¬',
+  `validemail` varchar(1) DEFAULT 'n' COMMENT 'ÊÇ·ñÒÑÑéÖ¤ÓÊÏä nÎ´ÑéÖ¤ sÒÔ·¢ËÍ yÒÑÑéÖ¤',
+  `validphone` varchar(1) DEFAULT 'n' COMMENT 'ÊÇ·ñÒÑÑéÖ¤ÊÖ»ú n Î´ÑéÖ¤ sÒÔ·¢ËÍ yÒÑÑéÖ¤',
   PRIMARY KEY (`usid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COMMENT='ÓÃ»§ĞÅÏ¢±í';
 
 -- ----------------------------
--- Records of t_user
+-- Table structure for t_uwitha
 -- ----------------------------
+DROP TABLE IF EXISTS `t_uwitha`;
+CREATE TABLE `t_uwitha` (
+  `auid` int(11) NOT NULL,
+  `usid` int(11) NOT NULL,
+  `aid` int(11) NOT NULL,
+  PRIMARY KEY (`auid`),
+  KEY `usid` (`usid`),
+  KEY `aid` (`aid`),
+  CONSTRAINT `t_uwitha_ibfk_1` FOREIGN KEY (`usid`) REFERENCES `t_user` (`usid`),
+  CONSTRAINT `t_uwitha_ibfk_2` FOREIGN KEY (`aid`) REFERENCES `t_address` (`aid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
